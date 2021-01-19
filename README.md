@@ -1,27 +1,25 @@
 # AngularRedditClone
+- Dự án là bản sao không hoàn chỉnh của https://www.reddit.com/
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.4.
+- Công nghệ sử dụng :
+  * Backend : https://github.com/thanhbinhgtv/Spring-RedditClone
+    + SpingBoot, Spring Data JPA, Spring Security
+    + Json Web Token
+  * Frontend :
+    + Angular
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Chức năng :
+  + Đăng ký : Xác thực tài khoản qua Mail
+  + Đăng nhập : Bảo mật tài khoản bằng JWT
+  + Tạo Subreddit
+  + Tạo các Post cho Subreddit
+  + User comment trong các bài Post
+  + User Vote Like hoặc Dislike cho các bài Post
+  + Thông tin User (Thống kê các bài Post, Comment của user này)
+  + Thống kê các Subreddit
+  + Chi tiết bài Post (ai đăng, đăng cách đây bao lâu, số lượt vote, các comment ...)
+  
+- Lưu ý :
+  + Database sẽ được tạo tự động khi run Backend.
+  + Cần xác thực tài khoản sau khi đăng ký mới có thể đăng nhập.
+  + Mã JWT sẽ được refresh mỗi 15p để tăng hiệu quả bảo mật.
