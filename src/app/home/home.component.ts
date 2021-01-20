@@ -8,16 +8,15 @@ import { PostService } from '../shared/post.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  // Post parent
   posts: Array<PostModel> = [];
 
-  constructor(private postService: PostService) {
-    this.postService.getAllPosts().subscribe(post => {
-      this.posts = post;
-    });
+  constructor(private postService: PostService) { 
+      this.postService.getAllPosts().subscribe(post =>{
+        this.posts = post;
+      });
   }
 
   ngOnInit(): void {
   }
-
 }

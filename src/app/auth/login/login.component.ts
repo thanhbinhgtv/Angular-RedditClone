@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginRequestPayload } from './login-request.payload';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../shared/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { LoginRequestPayload } from './login-request.payload';
 import { throwError } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,6 @@ import { throwError } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
   loginRequestPayload: LoginRequestPayload;
   registerSuccessMessage: string;
@@ -20,16 +19,16 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private activatedRoute: ActivatedRoute,
     private router: Router, private toastr: ToastrService) {
-    this.loginRequestPayload = {
-      username: '',
-      password: ''
-    };
+      this.loginRequestPayload = {
+          username: '',
+          password: ''
+      };
   }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+        username: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required)
     });
 
     this.activatedRoute.queryParams
@@ -42,18 +41,18 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  login() {
-    this.loginRequestPayload.username = this.loginForm.get('username').value;
-    this.loginRequestPayload.password = this.loginForm.get('password').value;
+  login(){
+      this.loginRequestPayload.username = this.loginForm.get('username').value;
+      this.loginRequestPayload.password = this.loginForm.get('password').value;
 
-    this.authService.login(this.loginRequestPayload).subscribe(data => {
-      this.isError = false;
-      this.router.navigateByUrl('');
-      this.toastr.success('Login Successful');
-    }, error => {
-      this.isError = true;
-      throwError(error);
-    });
+      this.authService.login(this.loginRequestPayload).subscribe(() =>{
+          this.isError = false;
+          this.router.navigateByUrl('/');
+          this.toastr.success('Login Successful');
+          console.log('Đăng nhập thành công');
+      }, error => {
+          this.isError = true;
+          throwError(error)
+      });
   }
-
 }

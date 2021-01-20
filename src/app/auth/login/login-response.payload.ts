@@ -1,6 +1,6 @@
-export interface LoginResponse {
-    authenticationToken: string;
-    refreshToken: string;
+export interface LoginResponse{
+    authenticationToken: String;
+    refreshToken: String;
     expiresAt: Date;
-    username: string;
+    username: String;
 }

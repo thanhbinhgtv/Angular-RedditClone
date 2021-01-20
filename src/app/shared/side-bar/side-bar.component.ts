@@ -10,7 +10,7 @@ export class SideBarComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   goToCreatePost() {
@@ -20,5 +20,4 @@ export class SideBarComponent implements OnInit {
   goToCreateSubreddit() {
     this.router.navigateByUrl('/create-subreddit');
   }
-
 }

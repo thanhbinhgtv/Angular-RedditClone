@@ -1,13 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
+import { throwError } from 'rxjs';
 import { PostModel } from '../post-model';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { PostService } from '../post.service';
+import { VoteService } from '../vote.service';
 import { VotePayload } from './vote-payload';
 import { VoteType } from './vote-type';
-import { VoteService } from '../vote.service';
-import { AuthService } from 'src/app/auth/shared/auth.service';
-import { PostService } from '../post.service';
-import { throwError } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-vote-button',
@@ -22,17 +21,15 @@ export class VoteButtonComponent implements OnInit {
   faArrowDown = faArrowDown;
   upvoteColor: string;
   downvoteColor: string;
-  isLoggedIn: boolean;
-
-  constructor(private voteService: VoteService,
-    private authService: AuthService,
-    private postService: PostService, private toastr: ToastrService) {
-
-    this.votePayload = {
-      voteType: undefined,
-      postId: undefined
-    }
-    this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
+  // isLoggedIn: boolean;
+  
+  constructor(private voteService: VoteService, private postService: PostService, 
+    private toastr: ToastrService) {
+        this.votePayload = {
+            voteType: undefined,
+            postId: undefined
+        }
+        //this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
   }
 
   ngOnInit(): void {
@@ -51,17 +48,21 @@ export class VoteButtonComponent implements OnInit {
     this.upvoteColor = '';
   }
 
+  // Lưu Vote vào csdl
   private vote() {
-    this.votePayload.postId = this.post.id;
+    this.votePayload.postId = this.post.id;    //id của bài post ta click
     this.voteService.vote(this.votePayload).subscribe(() => {
       this.updateVoteDetails();
+      this.toastr.success('Vote Successful');
     }, error => {
-      this.toastr.error(error.error.message);
+      // this.toastr.error(error.error.message);  //Backend ko hiện message
+      this.toastr.error('Vote Failed');
       throwError(error);
     });
   }
-
-  // ??
+  
+  // Nhận về tất cả bài Post theo id
+  // Truyền vào this.postVote.id => Nhận về tất cả bài Post theo id 
   private updateVoteDetails() {
     this.postService.getPost(this.post.id).subscribe(post => {
       this.post = post;

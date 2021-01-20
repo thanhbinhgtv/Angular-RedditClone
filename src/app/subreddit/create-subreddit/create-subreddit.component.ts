@@ -17,13 +17,13 @@ export class CreateSubredditComponent implements OnInit {
   description = new FormControl('');
 
   constructor(private router: Router, private subredditService: SubredditService) {
-      this.createSubredditForm = new FormGroup({
-        title: new FormControl('', Validators.required),
-        description: new FormControl('', Validators.required)
-      });
+      this.createSubredditForm = new FormGroup({      
+          title: new FormControl('', Validators.required),
+          description: new FormControl('', Validators.required)
+    });
       this.subredditModel = {
-        name: '',
-        description: ''
+          name: '',
+          description: ''
       }
   }
 
@@ -35,15 +35,13 @@ export class CreateSubredditComponent implements OnInit {
   }
 
   createSubreddit() {
-    console.log("ok");
-      this.subredditModel.name = this.createSubredditForm.get('title')
-      .value;
-      this.subredditModel.description = this.createSubredditForm.get('description')
-      .value;
+      this.subredditModel.name = this.createSubredditForm.get('title').value;
+      this.subredditModel.description = this.createSubredditForm.get('description').value;
+
       this.subredditService.createSubreddit(this.subredditModel).subscribe(data => {
         this.router.navigateByUrl('/list-subreddits');
       }, error => {
-        throwError(error);
+          throwError(error);
       })
-    }
+  }
 }

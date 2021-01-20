@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubredditService } from 'src/app/subreddit/subreddit.service';
 import { SubredditModel } from 'src/app/subreddit/subreddit-response';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-subreddit-side-bar',
@@ -12,6 +13,7 @@ export class SubredditSideBarComponent implements OnInit {
   displayViewAll: boolean;
 
   constructor(private subredditService: SubredditService) {
+    // Lấy về 3 Subreddit
     this.subredditService.getAllSubreddits().subscribe(data => {
       if (data.length > 3) {
         this.subreddits = data.splice(0, 3);
@@ -22,6 +24,7 @@ export class SubredditSideBarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
 }
