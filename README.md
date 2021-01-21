@@ -1,4 +1,4 @@
-# AngularRedditClone
+# Angular-RedditClone
 - Dự án là bản sao không hoàn chỉnh của https://www.reddit.com/
 
 - Công nghệ sử dụng :
